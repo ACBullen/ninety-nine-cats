@@ -1,0 +1,2 @@
+module CatRentalRequestControllerHelper
+end

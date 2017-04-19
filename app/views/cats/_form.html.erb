@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+      <%@cat%>
+    <form class="Cat" action= "<%= @cat.persisted? ? cat_url(@cat) : cats_url %>" method="POST">
+      <%if action == 'edit' %>
+    <input type="hidden" value="PATCH" name="_method">
+      <%end%>
+      <lable for="name">Name:</lable>
+    </br>
+
+      <input id="name" type='text' name="cats[name]" value="<%= @cat.name ? "#{@cat.name}" : '' %>">
+      <br>
+    </br>
+    <lable>Sex:</lable>
+    <br>
+      <lable for="female">Female</lable>
+      <input id="female" type="radio" checked="<%=@cat.sex == 'F' ? 'checked' : '' %>"  name="cats[sex]" value="F">
+      <label for="male">Male</lable>
+      <input id='male' type="radio" checked="<%=@cat.sex == 'M' ? 'checked' : '' %>" name="cats[sex]" value="M" >
+      <br>
+    </br>
+      <lable for="color"> Color:</lable>
+      <br>
+      <select id="color" name="cats[color]">
+        <option disabled "<%= @cat.color == nil ? 'selected' : ''%>">-SELECT A COLOR-</option>
+          <%Cat::COLORS.each do |color_op|%>
+          <<option "<%= @cat.color == color_op ? 'selected' : '' %>" value= "<%= "#{color_op}" %>" ><%= "#{color_op}"%></option>
+          <%end%>
+        </select>
+        <br>
+      </br>
+        <label for="bday">Birth Date:</lable>
+          <br>
+          <input type="date" name="cats[birth_date]" value= "<%="#{@cat.birth_date}"%>">
+          <br>
+        </br>
+          <lable for='desc'>Description:</lable>
+          <br>
+          <textarea id='desc' name='cats[description]'>
+          <%=@cat.description ? @cat.description : "Tell us about your cat!"%>
+          </textarea>
+          <br>
+        </br>
+          <input type="submit" value="<%=action == "edit" ? "Update cat!" : "Create cat!" %>">
+    </form>

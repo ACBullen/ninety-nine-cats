@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>cat rental form</title>
+    <h1>Rental Request Form</h1>
+  </head>
+  <body>
+    <form class="CatRentalRequest" action="cat_url" method="post">
+      <label for="name">Name:</label>
+      <%pool = Cats.all%>
+      <select id="name" name="cat_rental_request[cat_id]">
+        <option disabled selected>-PICK A CAT-</option>
+        <%pool.each do |cat|%>
+          <option value="<%= "#{cat.id}"%>"> <%="#{cat.name}"%></option>
+        <%end%>
+      </select>
+    </form>
+  </body>
+</html>

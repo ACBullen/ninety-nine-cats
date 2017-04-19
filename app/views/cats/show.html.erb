@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cat Page</title>
+    <h1><%="#{@cat.name}"%></h1>
+  </head>
+  <body>
+    <ul>
+      <li> <%= "Age: #{@cat.age} years old" %>
+      <li> <%= "Color: #{@cat.color}" %>
+      <li> <%= "Sex: #{@cat.sex}" %>
+    </ul>
+
+    <p>
+      <%="#{@cat.description}" %>
+    </p>
+    <br>
+
+  </br>
+
+  <h3>Rentals</h3>
+
+  <%pool = @cat.rentals.order(:start_date)%>
+
+  <%pool.each do |rental|%>
+  <h5>From: <%= "#{rental.start_date}"%></h5>
+  <h5>Until: <%="#{rental.end_date}"%></h5>
+  <h5>Status: <%= "#{rental.status}"%> </h5>
+
+  <%=button_to("Approve", approve_cat_rental_request_url(rental), method: :patch)%>
+
+  <%end%>
+
+  </body>
+</html>
